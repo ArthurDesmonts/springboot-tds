@@ -25,5 +25,5 @@ class Item {
         this.evaluation = evaluation
     }
 
-    
+
 }
