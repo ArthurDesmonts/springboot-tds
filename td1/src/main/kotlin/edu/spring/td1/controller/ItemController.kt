@@ -41,4 +41,5 @@ class ItemController {
         attrs.addFlashAttribute("msg", "${item.nom} ajouté dans les items")
         return RedirectView("/")
     }
+
 }
