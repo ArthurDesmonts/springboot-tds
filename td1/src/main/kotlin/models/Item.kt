@@ -1,29 +1,12 @@
-package models
+package edu.spring.td1.models
 
-class Item {
-    var nom : String = ""
-    var evaluation : Int = 0;
+import org.springframework.web.bind.annotation.ModelAttribute
 
-    constructor(nom : String, evaluation : Int) {
-        this.nom = nom
-        this.evaluation = evaluation
-    }
 
-    fun getNom() : String {
-        return this.nom
-    }
+class Item constructor(var nom : String = ""){
 
-    fun getEvaluation() : Int {
-        return this.evaluation
-    }
+    var evaluation : Int = 0
 
-    fun setNom(nom : String) {
-        this.nom = nom
-    }
-
-    fun setEvaluation(evaluation : Int) {
-        this.evaluation = evaluation
-    }
 
 
 }
