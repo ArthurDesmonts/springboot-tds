@@ -1,6 +1,7 @@
 package edu.spring.td1.controller
 
 import edu.spring.td1.models.Item
+import models.UIMessage
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
@@ -37,6 +38,9 @@ class ItemController {
                @SessionAttribute("items") items:HashSet<Item>,
                attrs:RedirectAttributes)
         : RedirectView {
+        if(item.nom == null || item.nom == "") {
+            return RedirectView("/items/new")
+        }
         items.add(item)
         attrs.addFlashAttribute("msg", "${item.nom} ajouté dans les items")
         return RedirectView("/")
@@ -61,7 +65,7 @@ class ItemController {
         var item = item.find{it.nom == nom}
         if (item != null) {
             item.evaluation--
-            attrs.addFlashAttribute("msg", "${item.nom} a été évalué ${item.evaluation} fois")
+            attrs.addFlashAttribute("msg", UIMessage.message("Ajout", "${item.nom} a été ajouté avec succés"));
         }
         return RedirectView("/")
     }
