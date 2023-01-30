@@ -1,7 +1,7 @@
 package models
 
 class UIMessage {
-    class Message constructor(var icon : String, var type : String, var title : String, var message : String) {
+    class Message constructor( var title : String, var message : String,var icon : String, var type : String) {
 
     }
 

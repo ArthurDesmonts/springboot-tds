@@ -42,7 +42,7 @@ class ItemController {
             return RedirectView("/items/new")
         }
         items.add(item)
-        attrs.addFlashAttribute("msg", "${item.nom} ajouté dans les items")
+        attrs.addFlashAttribute("msg", UIMessage.message("Ajout", "${item.nom} a été ajouté avec succés"))
         return RedirectView("/")
     }
 
@@ -54,7 +54,6 @@ class ItemController {
         var item = items.find { it.nom == nom }
         if (item != null) {
             item.evaluation++
-            attrs.addFlashAttribute("msg", "${item.nom} a été évalué ${item.evaluation} fois")
         }
         return RedirectView("/")
     }
@@ -65,7 +64,6 @@ class ItemController {
         var item = item.find{it.nom == nom}
         if (item != null) {
             item.evaluation--
-            attrs.addFlashAttribute("msg", UIMessage.message("Ajout", "${item.nom} a été ajouté avec succés"));
         }
         return RedirectView("/")
     }
