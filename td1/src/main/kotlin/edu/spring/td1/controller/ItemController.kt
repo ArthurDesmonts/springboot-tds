@@ -70,4 +70,15 @@ class ItemController {
         return RedirectView("/")
     }
 
+    @GetMapping("items/delete/{nom}")
+    fun delItem(@PathVariable("nom") nom:String, @SessionAttribute("items") items:HashSet<Item>, attrs:RedirectAttributes)
+            : RedirectView{
+        var item = items.find { it.nom == nom }
+        if(item != null){
+            items.remove(item);
+            attrs.addFlashAttribute("msg", UIMessage.message("suppresion", "${item.nom} a bien été supprimé"))
+        }
+        return RedirectView("/")
+    }
+
 }
