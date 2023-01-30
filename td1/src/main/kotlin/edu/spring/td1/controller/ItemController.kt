@@ -42,4 +42,28 @@ class ItemController {
         return RedirectView("/")
     }
 
+    @GetMapping("items/inc/{nom}")
+    fun incAction(@PathVariable("nom") nom:String,
+                  @SessionAttribute("items") items:HashSet<Item>,
+                  attrs:RedirectAttributes)
+        : RedirectView {
+        var item = items.find { it.nom == nom }
+        if (item != null) {
+            item.evaluation++
+            attrs.addFlashAttribute("msg", "${item.nom} a été évalué ${item.evaluation} fois")
+        }
+        return RedirectView("/")
+    }
+
+    @GetMapping("items/dec/{nom}")
+    fun decAction(@PathVariable("nom") nom:String, @SessionAttribute("items") item:HashSet<Item>, attrs:RedirectAttributes)
+        : RedirectView{
+        var item = item.find{it.nom == nom}
+        if (item != null) {
+            item.evaluation--
+            attrs.addFlashAttribute("msg", "${item.nom} a été évalué ${item.evaluation} fois")
+        }
+        return RedirectView("/")
+    }
+
 }
