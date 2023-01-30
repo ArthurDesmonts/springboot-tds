@@ -54,6 +54,7 @@ class ItemController {
         var item = items.find { it.nom == nom }
         if (item != null) {
             item.evaluation++
+            attrs.addFlashAttribute("msg", UIMessage.message("modification", "${item.nom} a bien été modifié"))
         }
         return RedirectView("/")
     }
@@ -64,6 +65,7 @@ class ItemController {
         var item = item.find{it.nom == nom}
         if (item != null) {
             item.evaluation--
+            attrs.addFlashAttribute("msg", UIMessage.message("modification", "${item.nom} a bien été modifié"))
         }
         return RedirectView("/")
     }
