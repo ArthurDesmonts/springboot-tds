@@ -13,4 +13,7 @@ open class Organisation {
     open var domain:String ?= null
     @Column(length = 45)
     open var aliases:String ?= null
+
+    @OneToMany(mappedBy = "organisation",fetch = FetchType.EAGER)
+    open val users:Set<Users> ?= HashSet()
 }

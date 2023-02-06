@@ -7,19 +7,20 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.view.RedirectView
 
 @Controller
-@RequestMapping("/oragas/")
+@RequestMapping("/orgas/")
 class OrgaController {
 
     @Autowired
     lateinit var orgaRepository: OrganisationRepository
 
     @GetMapping("add/{name}")
-    fun testAddAction(@PathVariable name:String):String{
+    fun testAddAction(@PathVariable name:String): RedirectView {
         val orga = Organisation()
         orga.nom = name
         orgaRepository.save(orga)
-        return "Organisation $name ajoutée avec succès"
+        return RedirectView("/")
     }
 }
