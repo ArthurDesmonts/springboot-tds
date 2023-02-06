@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class Td2Application
 
 fun main(args: Array<String>) {
-    runApplication<Td2Application>(*args)
+	runApplication<Td2Application>(*args)
 }
