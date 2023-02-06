@@ -18,6 +18,6 @@ open class Groupe constructor() {
     @JoinColumn(name = "idOrganisation", nullable = false)
     open lateinit var organisation:Organisation
 
-    @ManyToMany(mappedBy = "groups")
-    open var users:Set<Users> ?= HashSet()
+    @ManyToMany(mappedBy = "groupe")
+    open val users:Set<Users> = HashSet()
 }

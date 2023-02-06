@@ -14,6 +14,13 @@ open class Organisation {
     @Column(length = 45)
     open var aliases:String ?= null
 
-    @OneToMany(mappedBy = "organisation",fetch = FetchType.EAGER)
-    open val users:Set<Users> ?= HashSet()
+    @OneToMany(mappedBy = "organisation",fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    open val users = HashSet<Users>()
+
+    @OneToMany(mappedBy = "organisation")
+    open val groups = HashSet<Groupe>()
+
+    fun addUser(user: Users) {
+
+    }
 }
