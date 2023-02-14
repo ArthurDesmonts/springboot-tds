@@ -17,11 +17,12 @@ open class Users {
     @Column(nullable = false, length = 255, unique = true)
     open lateinit var email : String
 
-    @ManyToMany(cascade = [CascadeType.ALL])
-    @JoinTable(
-        name = "users_groupe",
-        joinColumns = [JoinColumn(name = "idUsers")],
-        inverseJoinColumns = [JoinColumn(name = "idGroupe")]
-    )
+    @ManyToOne
+    @JoinColumn(name = "idOrganisation", nullable = false)
+    open lateinit var organisation:Organisation
+
+    @ManyToMany
+    @JoinTable(name = "users_groupe")
+    open val groupe: Set<Groupe> = HashSet()
 
 }

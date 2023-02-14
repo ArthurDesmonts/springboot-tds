@@ -8,17 +8,17 @@ open class Organisation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id:Int ?= null
     @Column(nullable = false, length = 60)
-    open lateinit var nom: String
+    open lateinit var name: String
     @Column(length = 45)
     open var domain:String ?= null
     @Column(length = 45)
-    open var aliases:String ?= null
+    open var alias:String ?= null
 
     @OneToMany(mappedBy = "organisation",fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    open val users = HashSet<Users>()
+    open val users = mutableSetOf<Users>()
 
     @OneToMany(mappedBy = "organisation")
-    open val groups = HashSet<Groupe>()
+    open val groups = mutableSetOf<Groupe>()
 
     fun addUser(user: Users) {
 
