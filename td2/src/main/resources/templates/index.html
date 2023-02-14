@@ -1,8 +1,20 @@
 {{>main/header}}
 <h1>Welcome</h1>
-{{#organisation}}
-    <ul>
-        <li>{{name}} {{domain}} {{alias}} </li>
-    </ul>
-{{/organisation}}
+<table class="ui celled table">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Domain</th>
+        <th>Aliases</th>
+    </tr>
+    <tbody>
+    {{#organisation}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{domain}}</td>
+            <td>{{alias}}</td>
+        </tr>
+    {{/organisation}}
+    </tbody>
+</table>
 {{>main/footer}}
