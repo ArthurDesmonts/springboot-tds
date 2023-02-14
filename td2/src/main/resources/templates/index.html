@@ -6,6 +6,9 @@
         <th>Name</th>
         <th>Domain</th>
         <th>Aliases</th>
+        <th>
+            <a href="/orgas/addOrgas" class="ui button green">Ajouter</a>
+        </th>
     </tr>
     <tbody>
     {{#organisation}}
@@ -13,6 +16,10 @@
             <td>{{name}}</td>
             <td>{{domain}}</td>
             <td>{{alias}}</td>
+            <td>
+                <a href="editOrgas/{{id}}" class="ui button blue">Edit</a>
+                <a href="deleteOrgas/{{id}}" class="ui button red">Delete</a>
+            </td>
         </tr>
     {{/organisation}}
     </tbody>

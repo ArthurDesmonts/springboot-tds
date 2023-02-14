@@ -1,6 +1,7 @@
 package edu.spring.td2.Controller
 
 import edu.spring.td2.entities.Organisation
+import edu.spring.td2.exception.ElementNotFoundException
 import edu.spring.td2.repositories.OrganisationRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -43,9 +44,10 @@ class OrgaController {
     @GetMapping("/display/{id}")
     fun display(@PathVariable id:Int, model: ModelMap): String {
         val option = orgaRepository.findById(id)
-        option.ifPresent {
-            model["orga"] = it
+        if(option.isPresent) {
+            model["orga"] = option.get()
+            return "/main/orgas/display"
         }
-        return "/main/orgas/display"
+        throw ElementNotFoundException("Organisation with id $id not found")
     }
 }
