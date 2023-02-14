@@ -50,4 +50,13 @@ class OrgaController {
         }
         throw ElementNotFoundException("Organisation with id $id not found")
     }
+
+    @GetMapping("/delete/{id}")
+    fun deleteAction(@PathVariable id:Int, model: ModelMap): RedirectView {
+        val option = orgaRepository.findById(id)
+        if(option.isPresent) {
+            orgaRepository.delete(option.get())
+        }
+        return RedirectView("/")
+    }
 }
