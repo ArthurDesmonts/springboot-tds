@@ -39,4 +39,13 @@ class OrgaController {
         orgaRepository.save(orga)
         return RedirectView("/")
     }
+
+    @GetMapping("/display/{id}")
+    fun display(@PathVariable id:Int, model: ModelMap): String {
+        val option = orgaRepository.findById(id)
+        option.ifPresent {
+            model["orga"] = it
+        }
+        return "/main/orgas/display"
+    }
 }
