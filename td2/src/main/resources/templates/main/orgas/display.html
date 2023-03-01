@@ -1,10 +1,15 @@
 {{>main/header}}
-<form method="post" action="/orgas/comeBack">
+<form method="get">
   {{#organisation}}
+
   <h1>Name : {{name}}</h1>
   <h1>Domaine : {{domain}}</h1>
   <h1>Alias : {{alias}}</h1>
+  <input type="hidden" name="id" value="{{id}}">
+  <input type="submit" formaction="/orgas/update/{{id}}" class="ui button blue" value="Modifier">
+  <input type="submit" formaction="/orgas/comeBack" class="ui button purple" value="Retour <-|">
+  <input type="submit" formaction="/orgas/delete/{{id}}" class="ui button red" value="Supprimer">
   {{/organisation}}
-    <input type="submit" class="ui button purple" value="Retour <-|">
+
 </form>
 {{>main/footer}}
