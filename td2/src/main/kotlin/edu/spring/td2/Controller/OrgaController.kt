@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -64,20 +65,20 @@ class OrgaController {
     fun updateAction(@PathVariable id:Int, model: ModelMap): String{
         val option = orgaRepository.findById(id)
         if(option.isPresent) {
-            model["orga"] = option.get()
+            model["organisation"] = option.get()
             return "/main/orgas/update_form"
         }
         throw ElementNotFoundException("Organisation with id $id not found")
     }
-    @PostMapping("updateAction")
-    fun submitUpdateAction(orga:Organisation): RedirectView {
+    @PostMapping("update")
+    fun submitUpdateAction(@ModelAttribute("organisation") orga:Organisation): RedirectView {
         orgaRepository.save(orga)
         return RedirectView("/")
     }
 
     @GetMapping("display")
     fun displayAllAction(model: ModelMap): String {
-        model["orgas"] = orgaRepository.findAll()
+        model["organisation"] = orgaRepository.findAll()
         return "/main/orgas/display_all"
     }
 }

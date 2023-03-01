@@ -1,8 +1,7 @@
 {{>main/header}}
-<form method="get" action="updateAction">
+<form method="post" action="/orgas/update">
     {{#organisation}}
     <label>Name</label>
-    Name : {{name}}
     <input type="text" name="name" value="{{name}}">
     <label>Domain</label>
     <input type="text" name="domain" value="{{domain}}">
@@ -10,6 +9,6 @@
     <input type="text" name="alias" value="{{alias}}">
     <input type="hidden" name="id" value="{{id}}">
     {{/organisation}}
-    <button type="submit" class="ui button green">Submit</button>
+    <button type="submit" class="ui button green">Modifier</button>
 </form>
 {{>main/footer}}
