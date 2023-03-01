@@ -76,7 +76,7 @@ class OrgaController {
         return RedirectView("/")
     }
 
-    @PostMapping("comeBack")
+    @GetMapping("comeBack")
     fun comeBackAction(): RedirectView {
         return RedirectView("/")
     }
