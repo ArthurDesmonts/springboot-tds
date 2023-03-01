@@ -46,7 +46,7 @@ class OrgaController {
     fun display(@PathVariable id:Int, model: ModelMap): String {
         val option = orgaRepository.findById(id)
         if(option.isPresent) {
-            model["orga"] = option.get()
+            model["organisation"] = option.get()
             return "/main/orgas/display"
         }
         throw ElementNotFoundException("Organisation with id $id not found")
@@ -76,9 +76,8 @@ class OrgaController {
         return RedirectView("/")
     }
 
-    @GetMapping("display")
-    fun displayAllAction(model: ModelMap): String {
-        model["organisation"] = orgaRepository.findAll()
-        return "/main/orgas/display_all"
+    @PostMapping("comeBack")
+    fun comeBackAction(): RedirectView {
+        return RedirectView("/")
     }
 }
