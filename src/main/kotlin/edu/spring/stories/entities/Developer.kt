@@ -21,8 +21,7 @@ class Developer (){
     @Column
     open var lastname : String? = null
 
-    @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
-    @JoinColumn(name = "developer_id")
+    @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER , cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     open var stories = mutableListOf<Story>()
 
     fun addStory(story: Story){
@@ -33,7 +32,6 @@ class Developer (){
         stories.remove(story)
         story.developer=null
     }
-
     fun preRemove(){
         stories.forEach { it.developer=null }
     }

@@ -17,7 +17,7 @@ class Story (){
 
     @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
     @JoinColumn(name = "developer_id")
-    open var developer : MutableList<Developer>? = null
+    open var developer : Developer ? = null
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
     open var tags = mutableSetOf<Tag>()
