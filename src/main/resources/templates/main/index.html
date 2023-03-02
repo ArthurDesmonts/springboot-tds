@@ -4,5 +4,24 @@
     <input type="text" name="firstname" placeholder="firstname">
     <input type="text" name="lastname" placeholder="lastname">
     <input formmethod="post" type="submit" formaction="developer/add" value="+">
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Developpeur</th>
+            <th>Stories</th>
+            <th>Actions</th>
+        </tr>
+        <tbody>
+        {{#developer}}
+        <tr>
+            <td>{{firstname lastname}}</td>
+            <td>
+                <a href="/developer/{id}/delete" class="ui button black">Show</a>
+                <a href="/developer/{id}/story" class="ui button black">Show</a>
+            </td>
+        </tr>
+        {{/developer}}
+        </tbody>
+    </table>
 </form>
 {{>main/footer}}
