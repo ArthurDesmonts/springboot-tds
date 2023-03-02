@@ -2,7 +2,11 @@ package edu.spring.stories.entities
 
 import jakarta.persistence.*
 
-class Story {
+class Story (){
+
+    constructor(name: String) : this(){
+        this.name = name
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
