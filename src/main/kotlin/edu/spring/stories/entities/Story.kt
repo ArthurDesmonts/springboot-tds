@@ -2,7 +2,9 @@ package edu.spring.stories.entities
 
 import jakarta.persistence.*
 
-class Story (){
+
+@Entity
+open class Story (){
 
     constructor(name: String) : this(){
         this.name = name
@@ -15,10 +17,10 @@ class Story (){
     @Column(nullable = false, length = 50)
     open var name : String? = null
 
-    @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
+    @ManyToOne
     @JoinColumn(name = "developer_id")
     open var developer : Developer ? = null
 
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
+    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     open var tags = mutableSetOf<Tag>()
 }

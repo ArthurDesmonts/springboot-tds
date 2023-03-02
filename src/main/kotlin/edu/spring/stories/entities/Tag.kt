@@ -2,7 +2,8 @@ package edu.spring.stories.entities
 
 import jakarta.persistence.*
 
-class Tag () {
+@Entity
+open class Tag () {
 
     constructor(color: String, label: String) : this() {
         this.color = color
@@ -19,7 +20,7 @@ class Tag () {
     @Column(nullable = false,length = 30)
     open var label : String? = null
 
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
+    @ManyToMany
     open var stories = mutableSetOf<Story>()
 
 }

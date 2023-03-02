@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 
 @Entity
-class Developer (){
+open class Developer (){
 
     constructor(firstname: String, lastname: String) : this(){
         this.firstname = firstname
