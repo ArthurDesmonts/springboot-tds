@@ -2,7 +2,12 @@ package edu.spring.stories.entities
 
 import jakarta.persistence.*
 
-class Tag {
+class Tag () {
+
+    constructor(color: String, label: String) : this() {
+        this.color = color
+        this.label = label
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
