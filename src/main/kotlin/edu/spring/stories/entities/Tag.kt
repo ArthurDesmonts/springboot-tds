@@ -13,4 +13,8 @@ class Tag {
 
     @Column(nullable = false,length = 30)
     open var label : String? = null
+
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER , cascade = [CascadeType.ALL])
+    open var stories = mutableSetOf<Story>()
+
 }
