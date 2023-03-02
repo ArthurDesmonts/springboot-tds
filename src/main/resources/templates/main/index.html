@@ -1,6 +1,8 @@
 {{>main/header}}
 <h1>Développeur Web</h1>
-
-
-
+<form class="ui form">
+    <input type="text" name="firstname" placeholder="firstname">
+    <input type="text" name="lastname" placeholder="lastname">
+    <input formmethod="post" type="submit" formaction="developer/add" value="+">
+</form>
 {{>main/footer}}
