@@ -21,11 +21,11 @@
                 </ul>
             </td>
             <td>
-                <form method="post" action="developer/{{id}}/story">
+                <form method="post" action="/developer/{{id}}/story">
                     <input type="text" name="US_add" placeholder="story name">
                     <input type="submit" class="ui button green" value="Ajouter US & Affecter">
                 </form>
-                <a href="developer/{{id}}/delete" class="ui button black">Quitter le projet</a>
+                <a href="/developer/{{id}}/delete" class="ui button black">Quitter le projet</a>
             </td>
         </tr>
         {{/developer}}
@@ -50,7 +50,7 @@
         <tr>
             <td>{{name}}</td>
             <td>
-                <a href="/story/{{id}}/action" class="ui button Red">X</a>
+                <a href="/story/{{id}}/action/remove" class="ui button red">X</a>
                 <a href="/story/{{id}}/action" class="ui button black">Add</a>
             </td>
         </tr>

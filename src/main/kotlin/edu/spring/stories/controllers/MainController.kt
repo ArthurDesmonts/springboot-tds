@@ -34,14 +34,22 @@ class MainController {
         return RedirectView("/")
     }
 
-    @PostMapping("developer/{id}/story")
+    @PostMapping("/developer/{id}/story")
     fun addStoryAction(@ModelAttribute story: Story, @PathVariable id: Int): RedirectView{
         val developer = developerRepository.findById(id).get()
-
+        var story = storyRepository.findById(story.id!!).get()
+        if(story != null){
+            developer.addStory(story)
+            developerRepository.save(developer)
+        }else{
+            story = Story(story.name!!)
+            story.developer = developer
+            storyRepository.save(story)
+        }
         return RedirectView("/")
     }
 
-    @GetMapping("developer/{id}/delete")
+    @GetMapping("/developer/{id}/delete")
     fun deleteDeveloperAction(@PathVariable id: Int): RedirectView{
         val developer = developerRepository.findById(id).get()
         developer.preRemove()
@@ -49,11 +57,11 @@ class MainController {
         return RedirectView("/")
     }
 
-    @GetMapping("/story/{id}/action")
+    @GetMapping("/story/{id}/action/remove")
     fun actionStoryAction(@PathVariable id: Int): RedirectView{
         val story = storyRepository.findById(id).get()
         story.developer?.giveUpStory(story)
-        storyRepository.save(story)
+        storyRepository.delete(story)
         return RedirectView("/")
     }
 
