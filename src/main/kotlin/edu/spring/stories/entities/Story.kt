@@ -14,7 +14,7 @@ open class Story (){
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id : Int? = null
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = true, length = 50)
     open var name : String? = null
 
     @ManyToOne

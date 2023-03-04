@@ -52,13 +52,13 @@
         <tr>
             <td>{{name}}</td>
             <td>
-                <select class="ui selection dropdown" name="story-action" formmethod="post" formaction="/story/{{id}}/action">
+                <select class="ui selection dropdown" name="developerID">
                     {{#developerWithoutStory}}
                     <option value="{{id}}">{{firstname}} {{lastname}}</option>
                     {{/developerWithoutStory}}
                 </select>
-                <button class="ui button green" name="action" value="affect" type="submit">+</button>
-                <button class="ui button red" name="action" value="remove" type="submit">X</button>
+                <input formmethod="post" formaction="/story/{{id}}/action/affect" class="ui button green" value="+" type="submit">
+                <input formmethod="post" formaction="/story/{{id}}/action/remove" class="ui button red" value="-" type="submit">
             </td>
         </tr>
         {{/story}}

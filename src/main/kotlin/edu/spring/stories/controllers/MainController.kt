@@ -24,7 +24,7 @@ class MainController {
     @GetMapping("/")
     fun indexAction(modelMap: ModelMap): String {
         modelMap["developer"] = developerRepository.findAll()
-        modelMap["story"] = storyRepository.findAll()
+        modelMap["story"] = storyRepository.findAll().filter { it.developer == null }
         modelMap["developerWithoutStory"] = developerRepository.findAll().filter { it.stories.isEmpty()}
         return "main/index"
     }
@@ -51,25 +51,21 @@ class MainController {
         return RedirectView("/")
     }
 
-    @PostMapping("/story/{id}/action")
-    fun actionStoryAction(@PathVariable id: Int, @RequestParam action: String, @RequestParam(required = false) developerId: Int?): RedirectView {
+    @PostMapping("/story/{id}/action/affect")
+    fun actionStoryAffect(@PathVariable id: Int, @RequestParam developerID: Int): RedirectView {
         val story = storyRepository.findById(id).get()
-        when (action) {
-            "remove" -> {
-                story.developer?.giveUpStory(story)
-                storyRepository.delete(story)
-            }
-            "affect" -> {
-                if (developerId != null) {
-                    val developer = developerRepository.findById(developerId).orElse(null)
-                    if (developer != null) {
-                        story.developer?.giveUpStory(story)
-                        developer.addStory(story)
-                        developerRepository.save(developer)
-                    }
-                }
-            }
-        }
+        val developer = developerRepository.findById(developerID).get()
+        developer.addStory(story)
+        developerRepository.save(developer)
+        storyRepository.delete(story)
+        return RedirectView("/")
+    }
+
+    @PostMapping("/story/{id}/action/remove")
+    fun actionStoryRemove(@PathVariable id: Int): RedirectView {
+        val story = storyRepository.findById(id).get()
+        story.developer?.giveUpStory(story)
+        storyRepository.delete(story)
         return RedirectView("/")
     }
 }
