@@ -35,17 +35,10 @@ class MainController {
     }
 
     @PostMapping("/developer/{id}/story")
-    fun addStoryAction(@ModelAttribute story: Story, @PathVariable id: Int): RedirectView{
+    fun addStoryAction(@PathVariable id: Int, story: Story): RedirectView{
         val developer = developerRepository.findById(id).get()
-        var story = storyRepository.findById(story.id!!).get()
-        if(story != null){
-            developer.addStory(story)
-            developerRepository.save(developer)
-        }else{
-            story = Story(story.name!!)
-            story.developer = developer
-            storyRepository.save(story)
-        }
+        developer.addStory(story)
+        developerRepository.save(developer)
         return RedirectView("/")
     }
 

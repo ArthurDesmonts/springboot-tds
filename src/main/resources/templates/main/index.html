@@ -4,6 +4,8 @@
     <input type="text" name="firstname" placeholder="firstname">
     <input type="text" name="lastname" placeholder="lastname">
     <input formmethod="post" type="submit" formaction="developer/add" value="+">
+</form>
+<form method="post" >
     <table class="ui celled table">
         <thead>
         <tr>
@@ -17,14 +19,12 @@
             <td>{{firstname}} {{lastname}}</td>
             <td>
                 <ul>
-                        <li>{{stories}}</li>
+                    <li>{{stories}}</li>
                 </ul>
             </td>
             <td>
-                <form method="post" action="/developer/{{id}}/story">
-                    <input type="text" name="US_add" placeholder="story name">
-                    <input type="submit" class="ui button green" value="Ajouter US & Affecter">
-                </form>
+                <input type="text" name="name" placeholder="story name">
+                <input type="submit" class="ui button green" formaction="/developer/{{id}}/story" value="Ajouter US & Affecter">
                 <a href="/developer/{{id}}/delete" class="ui button black">Quitter le projet</a>
             </td>
         </tr>
