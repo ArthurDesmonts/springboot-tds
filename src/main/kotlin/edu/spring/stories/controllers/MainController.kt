@@ -2,6 +2,7 @@ package edu.spring.stories.controllers
 
 import edu.spring.stories.entities.Developer
 import edu.spring.stories.repositories.DeveloperRepository
+import edu.spring.stories.repositories.StoryRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -18,9 +19,14 @@ class MainController {
 
     @Autowired
     lateinit var developerRepository: DeveloperRepository
+
+    @Autowired
+    lateinit var storyRepository: StoryRepository
+
     @GetMapping("/")
     fun indexAction( modelMap: ModelMap):String{
         modelMap["developer"] = developerRepository.findAll()
+        modelMap["story"] = storyRepository.findAll()
         return "main/index"
     }
 
@@ -29,5 +35,6 @@ class MainController {
         developerRepository.save(developer)
         return RedirectView("/")
     }
+
 
 }

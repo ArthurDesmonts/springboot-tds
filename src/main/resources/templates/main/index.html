@@ -21,6 +21,37 @@
             </td>
         </tr>
         {{/developer}}
+        {{^developer}}
+        <tr>
+            <td colspan="2">Il n'y a pas de développeur dans la base de données</td>
+        </tr>
+        {{/developer}}
+        </tbody>
+    </table>
+</form>
+<h1>User Stories à répartir</h1>
+<form>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Story</th>
+            <th>Actions</th>
+        </tr>
+        <tbody>
+        {{#story}}
+        <tr>
+            <td>{{name}}</td>
+            <td>
+                <a href="/story/{id}/delete" class="ui button black">Delete</a>
+                <a href="/story/{id}/developer" class="ui button black">Add</a>
+            </td>
+        </tr>
+        {{/story}}
+        {{^story}}
+        <tr>
+            <td colspan="2">Il n'y a pas d'US à attribuer dans la base de données</td>
+        </tr>
+        {{/story}}
         </tbody>
     </table>
 </form>
