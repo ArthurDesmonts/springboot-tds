@@ -16,8 +16,11 @@
         <tr>
             <td>{{firstname}} {{lastname}}</td>
             <td>
-                <a href="/developer/{id}/delete" class="ui button black">Show</a>
-                <a href="/developer/{id}/story" class="ui button black">Show</a>
+                <form method="post" action=/developer/{id}/story">
+                    <input type="text" name="US_add" placeholder="story name">
+                    <input type="submit" class="ui button green" value="Ajouter US & Affecter">
+                </form>
+                <a href="/developer/{id}/delete" class="ui button black">Quitter le projet</a>
             </td>
         </tr>
         {{/developer}}
