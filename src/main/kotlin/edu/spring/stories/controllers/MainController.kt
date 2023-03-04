@@ -1,15 +1,13 @@
 package edu.spring.stories.controllers
 
 import edu.spring.stories.entities.Developer
+import edu.spring.stories.entities.Story
 import edu.spring.stories.repositories.DeveloperRepository
 import edu.spring.stories.repositories.StoryRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.view.RedirectView
 
 
@@ -33,6 +31,29 @@ class MainController {
     @PostMapping("developer/add")
     fun addDeveloperAction(developer: Developer): RedirectView{
         developerRepository.save(developer)
+        return RedirectView("/")
+    }
+
+    @PostMapping("developer/{id}/story")
+    fun addStoryAction(@ModelAttribute story: Story, @PathVariable id: Int): RedirectView{
+        val developer = developerRepository.findById(id).get()
+
+        return RedirectView("/")
+    }
+
+    @GetMapping("developer/{id}/delete")
+    fun deleteDeveloperAction(@PathVariable id: Int): RedirectView{
+        val developer = developerRepository.findById(id).get()
+        developer.preRemove()
+        developerRepository.delete(developer)
+        return RedirectView("/")
+    }
+
+    @GetMapping("/story/{id}/action")
+    fun actionStoryAction(@PathVariable id: Int): RedirectView{
+        val story = storyRepository.findById(id).get()
+        story.developer?.giveUpStory(story)
+        storyRepository.save(story)
         return RedirectView("/")
     }
 

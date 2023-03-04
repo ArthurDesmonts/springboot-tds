@@ -18,7 +18,7 @@ open class Story (){
     open var name : String? = null
 
     @ManyToOne
-    @JoinColumn(name = "developer_id")
+    @JoinColumn(name = "developer_id", nullable = true)
     open var developer : Developer ? = null
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)

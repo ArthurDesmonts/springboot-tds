@@ -20,7 +20,7 @@ open class Tag () {
     @Column(nullable = false,length = 30)
     open var label : String? = null
 
-    @ManyToMany
-    open var stories = mutableSetOf<Story>()
+    @ManyToMany(fetch = FetchType.EAGER)
+    open var stories : MutableSet<Story> = mutableSetOf()
 
 }

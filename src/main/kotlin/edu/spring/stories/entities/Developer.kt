@@ -22,10 +22,11 @@ open class Developer (){
     open var lastname : String? = null
 
     @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER , cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-    open var stories = mutableListOf<Story>()
+    open var stories = mutableSetOf<Story>()
 
-    fun addStory(story: Story){
-        this.stories.add(story)
+    fun addStory(story: Story) {
+        story.developer = this
+        stories.add(story)
     }
 
     fun giveUpStory(story: Story){
