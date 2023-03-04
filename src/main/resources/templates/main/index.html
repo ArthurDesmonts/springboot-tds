@@ -19,7 +19,9 @@
             <td>{{firstname}} {{lastname}}</td>
             <td>
                 <ul>
-                    <li>{{stories}}</li>
+                    {{#stories}}
+                    <li>{{name}}</li>
+                    {{/stories}}
                 </ul>
             </td>
             <td>
@@ -50,8 +52,13 @@
         <tr>
             <td>{{name}}</td>
             <td>
-                <a href="/story/{{id}}/action/remove" class="ui button red">X</a>
-                <a href="/story/{{id}}/action" class="ui button black">Add</a>
+                <select class="ui selection dropdown" name="story-action" formmethod="post" formaction="/story/{{id}}/action">
+                    {{#developerWithoutStory}}
+                    <option value="{{id}}">{{firstname}} {{lastname}}</option>
+                    {{/developerWithoutStory}}
+                </select>
+                <button class="ui button green" name="action" value="affect" type="submit">+</button>
+                <button class="ui button red" name="action" value="remove" type="submit">X</button>
             </td>
         </tr>
         {{/story}}

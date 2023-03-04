@@ -22,20 +22,21 @@ class MainController {
     lateinit var storyRepository: StoryRepository
 
     @GetMapping("/")
-    fun indexAction( modelMap: ModelMap):String{
+    fun indexAction(modelMap: ModelMap): String {
         modelMap["developer"] = developerRepository.findAll()
         modelMap["story"] = storyRepository.findAll()
+        modelMap["developerWithoutStory"] = developerRepository.findAll().filter { it.stories.isEmpty()}
         return "main/index"
     }
 
     @PostMapping("developer/add")
-    fun addDeveloperAction(developer: Developer): RedirectView{
+    fun addDeveloperAction(developer: Developer): RedirectView {
         developerRepository.save(developer)
         return RedirectView("/")
     }
 
     @PostMapping("/developer/{id}/story")
-    fun addStoryAction(@PathVariable id: Int, story: Story): RedirectView{
+    fun addStoryAction(@PathVariable id: Int, story: Story): RedirectView {
         val developer = developerRepository.findById(id).get()
         developer.addStory(story)
         developerRepository.save(developer)
@@ -43,20 +44,32 @@ class MainController {
     }
 
     @GetMapping("/developer/{id}/delete")
-    fun deleteDeveloperAction(@PathVariable id: Int): RedirectView{
+    fun deleteDeveloperAction(@PathVariable id: Int): RedirectView {
         val developer = developerRepository.findById(id).get()
         developer.preRemove()
         developerRepository.delete(developer)
         return RedirectView("/")
     }
 
-    @GetMapping("/story/{id}/action/remove")
-    fun actionStoryAction(@PathVariable id: Int): RedirectView{
+    @PostMapping("/story/{id}/action")
+    fun actionStoryAction(@PathVariable id: Int, @RequestParam action: String, @RequestParam(required = false) developerId: Int?): RedirectView {
         val story = storyRepository.findById(id).get()
-        story.developer?.giveUpStory(story)
-        storyRepository.delete(story)
+        when (action) {
+            "remove" -> {
+                story.developer?.giveUpStory(story)
+                storyRepository.delete(story)
+            }
+            "affect" -> {
+                if (developerId != null) {
+                    val developer = developerRepository.findById(developerId).orElse(null)
+                    if (developer != null) {
+                        story.developer?.giveUpStory(story)
+                        developer.addStory(story)
+                        developerRepository.save(developer)
+                    }
+                }
+            }
+        }
         return RedirectView("/")
     }
-
-
 }
