@@ -25,7 +25,7 @@ class MainController {
     fun indexAction(modelMap: ModelMap): String {
         modelMap["developer"] = developerRepository.findAll()
         modelMap["story"] = storyRepository.findAll().filter { it.developer == null }
-        modelMap["developerWithoutStory"] = developerRepository.findAll().filter { it.stories.isEmpty()}
+        modelMap["AllDevelopers"] = developerRepository.findAll()
         return "main/index"
     }
 
