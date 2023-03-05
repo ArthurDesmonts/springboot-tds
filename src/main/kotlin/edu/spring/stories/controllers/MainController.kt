@@ -68,4 +68,12 @@ class MainController {
         storyRepository.delete(story)
         return RedirectView("/")
     }
+
+    @GetMapping("/story/{id}/giveup")
+    fun giveUpStoryAction(@PathVariable id: Int): RedirectView {
+        val story = storyRepository.findById(id).get()
+        story.developer?.giveUpStory(story)
+        storyRepository.save(story)
+        return RedirectView("/")
+    }
 }

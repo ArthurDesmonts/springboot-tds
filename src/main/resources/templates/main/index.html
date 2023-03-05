@@ -18,11 +18,12 @@
         <tr>
             <td>{{firstname}} {{lastname}}</td>
             <td>
-                <ul>
-                    {{#stories}}
-                    <li>{{name}}</li>
-                    {{/stories}}
-                </ul>
+                {{#stories}}
+                <div class="ui label">
+                    {{name}}
+                    <button formmethod="get" formaction="/story/{{id}}/giveup"><i class="delete icon"></i></button>
+                </div>
+                {{/stories}}
             </td>
             <td>
                 <input type="text" name="name" placeholder="story name">
