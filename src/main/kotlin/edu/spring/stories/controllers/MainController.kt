@@ -31,17 +31,19 @@ class MainController {
         return "main/index"
     }
 
-    @PostMapping("developer/add")
+    @PostMapping("/developer/add")
     fun addDeveloperAction(developer: Developer): RedirectView {
         developerRepository.save(developer)
         return RedirectView("/")
     }
 
     @PostMapping("/developer/{id}/story")
-    fun addStoryAction(@PathVariable id: Int, story: Story): RedirectView {
-        val developer = developerRepository.findById(id).get()
-        developer.addStory(story)
-        developerRepository.save(developer)
+    fun addStoryAction(@PathVariable id: Int,@RequestParam(name="story-action") action : String, story: Story): RedirectView {
+        if(action =="add") {
+            val developer = developerRepository.findById(id).get()
+            developer.addStory(story)
+            developerRepository.save(developer)
+        }
         return RedirectView("/")
     }
 
@@ -53,29 +55,26 @@ class MainController {
         return RedirectView("/")
     }
 
-    @PostMapping("/story/{id}/action/affect")
-    fun actionStoryAffect(@PathVariable id: Int, @RequestParam developerID: Int): RedirectView {
-        val story = storyRepository.findById(id).get()
-        val developer = developerRepository.findById(developerID).get()
-        developer.addStory(story)
-        developerRepository.save(developer)
-        storyRepository.delete(story)
-        return RedirectView("/")
-    }
-
-    @PostMapping("/story/{id}/action/remove")
-    fun actionStoryRemove(@PathVariable id: Int): RedirectView {
-        val story = storyRepository.findById(id).get()
-        story.developer?.giveUpStory(story)
-        storyRepository.delete(story)
-        return RedirectView("/")
-    }
-
     @GetMapping("/story/{id}/giveup")
     fun giveUpStoryAction(@PathVariable id: Int): RedirectView {
         val story = storyRepository.findById(id).get()
         story.developer?.giveUpStory(story)
         storyRepository.save(story)
+        return RedirectView("/")
+    }
+
+    @PostMapping("/story/{id}/action")
+    fun actionStoryAction(@PathVariable id: Int, @RequestParam(name="story-action") action: String, @RequestParam developerID : Int): RedirectView {
+        val story = storyRepository.findById(id).get()
+        if(action =="affect"){
+            val developer = developerRepository.findById(developerID).get()
+            developer.addStory(story)
+            developerRepository.save(developer)
+            storyRepository.delete(story)
+        }
+        if(action =="remove"){
+            storyRepository.delete(story)
+        }
         return RedirectView("/")
     }
 

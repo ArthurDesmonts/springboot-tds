@@ -33,7 +33,10 @@ open class Developer (){
         stories.remove(story)
         story.developer=null
     }
+    @PreRemove
     fun preRemove(){
         stories.forEach { it.developer=null }
     }
+
+
 }

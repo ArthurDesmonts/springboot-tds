@@ -1,9 +1,13 @@
 {{>main/header}}
-<h1>Développeur Web <label class="ui blue left pointing label">{{countDevelopers}}</label></h1>
-<form class="ui form">
-    <input type="text" name="firstname" placeholder="firstname">
-    <input type="text" name="lastname" placeholder="lastname">
-    <input formmethod="post" type="submit" formaction="developer/add" value="+">
+<h1>Développeur Web <label class="ui blue left pointing label count-developers">{{countDevelopers}}</label></h1>
+<form method="post" action="/developer/add" class="ui form">
+    <div style="display: inline-block;">
+        <input type="text" name="firstname" placeholder="firstname">
+        <input type="text" name="lastname" placeholder="lastname">
+        <button type="submit" value="add">
+            <i class="plus icon"></i>
+        </button>
+    </div>
 </form>
 <form method="post" >
     <table class="ui celled table">
@@ -19,16 +23,16 @@
             <td>{{firstname}} {{lastname}}</td>
             <td>
                 {{#stories}}
-                <div class="ui label">
+                <div class="ui label dev-story">
                     {{name}}
-                    <button formmethod="get" formaction="/story/{{id}}/giveup"><i class="delete icon"></i></button>
+                    <button formmethod="get" formaction="/story/{{id}}/giveup"><i class="delete icon giveup-story"></i></button>
                 </div>
                 {{/stories}}
             </td>
             <td>
                 <input type="text" name="name" placeholder="story name">
-                <input type="submit" class="ui button green" formaction="/developer/{{id}}/story" value="Ajouter US & Affecter">
-                <a href="/developer/{{id}}/delete" class="ui button black">Quitter le projet</a>
+                <button formaction="/developer/{{id}}/story" name="story-action" value="add" class="ui button green">Ajouter US & Affecter</button>
+                <button formmethod="get" formaction="/developer/{{id}}/delete" class="ui button black delete-developer">Quitter le projet</button>
             </td>
         </tr>
         {{/developer}}
@@ -40,8 +44,8 @@
         </tbody>
     </table>
 </form>
-<h1>User Stories à répartir <label class="ui red left pointing label">{{countStories}}</label> </h1>
-<form>
+<h1>User Stories à répartir <label class="ui red left pointing label count-stories">{{countStories}}</label> </h1>
+<form method="post" >
     <table class="ui celled table">
         <thead>
         <tr>
@@ -58,8 +62,12 @@
                     <option value="{{id}}">{{firstname}} {{lastname}}</option>
                     {{/AllDevelopers}}
                 </select>
-                <input formmethod="post" formaction="/story/{{id}}/action/affect" class="ui button grey" value="+" type="submit">
-                <input formmethod="post" formaction="/story/{{id}}/action/remove" class="ui button red" value="-" type="submit">
+                <button formaction="/story/{{id}}/action" name="story-action" class="ui icon button" value="affect" type="submit">
+                    <i class="plus icon"></i>
+                </button>
+                <button formaction="/story/{{id}}/action" name="story-action" class="ui button red" value="remove" type="submit">
+                    <i class="remove icon"></i>
+                </button>
             </td>
         </tr>
         {{/story}}

@@ -23,4 +23,6 @@ open class Story (){
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     open var tags = mutableSetOf<Tag>()
+
+
 }
