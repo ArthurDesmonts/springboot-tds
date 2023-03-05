@@ -64,7 +64,11 @@ class MainController {
     }
 
     @PostMapping("/story/{id}/action")
-    fun actionStoryAction(@PathVariable id: Int, @RequestParam(name="story-action") action: String, @RequestParam developerID : Int): RedirectView {
+    fun actionStoryAction(@PathVariable id: Int, @RequestParam(name="story-action") action: String, @RequestParam(required = false) developerID : Int?, modelMap: ModelMap): RedirectView {
+        if (developerID == null) {
+            modelMap.addAttribute("error", "Il n'y a pas de développer à affecter")
+            return RedirectView("/")
+        }
         val story = storyRepository.findById(id).get()
         if(action =="affect"){
             val developer = developerRepository.findById(developerID).get()
