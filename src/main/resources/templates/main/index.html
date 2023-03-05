@@ -1,5 +1,5 @@
 {{>main/header}}
-<h1>Développeur Web</h1>
+<h1>Développeur Web <label class="ui blue left pointing label">{{countDevelopers}}</label></h1>
 <form class="ui form">
     <input type="text" name="firstname" placeholder="firstname">
     <input type="text" name="lastname" placeholder="lastname">
@@ -40,7 +40,7 @@
         </tbody>
     </table>
 </form>
-<h1>User Stories à répartir</h1>
+<h1>User Stories à répartir <label class="ui red left pointing label">{{countStories}}</label> </h1>
 <form>
     <table class="ui celled table">
         <thead>

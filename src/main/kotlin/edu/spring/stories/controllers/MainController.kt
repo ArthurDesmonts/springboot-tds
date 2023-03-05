@@ -26,6 +26,8 @@ class MainController {
         modelMap["developer"] = developerRepository.findAll()
         modelMap["story"] = storyRepository.findAll().filter { it.developer == null }
         modelMap["AllDevelopers"] = developerRepository.findAll()
+        modelMap["countDevelopers"] = developerRepository.count()
+        modelMap["countStories"] = storyRepository.findAll().filter { it.developer == null }.count()
         return "main/index"
     }
 
@@ -76,4 +78,5 @@ class MainController {
         storyRepository.save(story)
         return RedirectView("/")
     }
+
 }
