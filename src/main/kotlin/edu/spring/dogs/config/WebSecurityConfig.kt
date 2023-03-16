@@ -1,6 +1,7 @@
 package edu.spring.dogs.config
 
 import edu.spring.dogs.services.DbUserService
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -20,7 +21,14 @@ class WebSecurityConfig {
             .requestMatchers("/master/**").hasRole("manager")
             .anyRequest().authenticated()
             .and()
-            .formLogin()
+            .formLogin().loginPage("/login")
+            .and()
+            .authorizeHttpRequests()
+            .requestMatchers(PathRequest.toH2Console()).permitAll() // (1)
+            .and()
+            .headers().frameOptions().sameOrigin() // (2)
+            .and()
+            .csrf().disable() // (3)
         return http.build()
     }
     @Bean

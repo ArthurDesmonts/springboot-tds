@@ -1,7 +1,8 @@
 package edu.spring.dogs.entities
 
-import jakarta.persistence.Entity
+
 import jakarta.persistence.*
+import org.springframework.security.core.GrantedAuthority
 
 @Entity
 open class User() {
@@ -25,4 +26,11 @@ open class User() {
 
     @Column(nullable = false)
     open lateinit var role:String
+
+    private fun getGrantedAuthorities(user: User): List<GrantedAuthority>? {
+        val authorities: MutableList<GrantedAuthority> = ArrayList()
+        val role: Role = user.role
+        authorities.add(SimpleGrantedAuthority(role.name))
+        return authorities
+    }
 }
