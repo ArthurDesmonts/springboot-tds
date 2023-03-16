@@ -25,12 +25,7 @@ open class User() {
     open var email:String?=null
 
     @Column(nullable = false)
-    open lateinit var role:String
+    open lateinit var role:Role
 
-    private fun getGrantedAuthorities(user: User): List<GrantedAuthority>? {
-        val authorities: MutableList<GrantedAuthority> = ArrayList()
-        val role: Role = user.role
-        authorities.add(SimpleGrantedAuthority(role.name))
-        return authorities
-    }
+
 }

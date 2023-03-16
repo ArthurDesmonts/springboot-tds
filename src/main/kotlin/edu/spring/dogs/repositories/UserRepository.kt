@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.Query
 interface UserRepository : JpaRepository<User, Int> {
     @Query("SELECT u FROM User u WHERE u.username=:usernameOrEmail OR u.email=:usernameOrEmail")
     fun findByUsernameOrEmail(usernameOrEmail: String?): User?
+
+
 }
