@@ -40,4 +40,12 @@ class Domain() {
         return complaints.size
     }
 
+    fun getChildComplaintsCount():Int{
+        var count = 0
+        for(child in children){
+            count += child.getComplaintsCount()
+        }
+        return count
+    }
+
 }

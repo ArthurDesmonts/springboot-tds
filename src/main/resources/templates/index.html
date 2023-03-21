@@ -1,7 +1,7 @@
 {{> main/header }}
 <h1 class="ui header blue">{{root}}</h1>
 <h2 class="ui header inverted">Domaines
-    <span class="ui label">
+    <span class="ui left pointing label">
         {{childrenSize}}
     </span>
 </h2>
@@ -14,8 +14,13 @@
             <div class="description">
                 {{description}}
                 <br>
-                <i class="bug icon"></i>
-                {{complaints.size}} plaintes
+                <i class="bug icon blue"></i>
+
+                    {{getChildComplaintsCount}} plaintes
+
+                <span class="ui left pointing label">
+                    {{complaints.size}}
+                </span>
             </div>
 
         </div>
