@@ -39,4 +39,5 @@ class Domain() {
     fun getComplaintsCount():Int{
         return complaints.size
     }
+    
 }
