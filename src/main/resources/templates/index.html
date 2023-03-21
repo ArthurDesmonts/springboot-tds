@@ -1,3 +1,30 @@
 {{> main/header }}
+<h1 class="ui header blue">{{root}}</h1>
+<h2>Domaines
+    <span class="ui label">
+        {{childrenSize}}
+    </span>
+</h2>
+{{#domains}}
+    <div class="ui link card">
+        <div class="content">
+            <div class="header">{{name}}</div>
+            <div class="meta">{{providers}}</div>
+        </div>
+        <div class="extra content">
+            <a href="/domain/{{id}}/edit" class="ui button">Modifier</a>
+            <a href="/domain/{{id}}/delete" class="ui button">Supprimer</a>
+        </div>
+    </div>
+{{/domains}}
+{{^domains}}
+    <div class="ui message">
+        <div class="header">
+            Aucun domaine
+        </div>
+        <p>Il n'y a aucun domaine pour le moment.</p>
+    </div>
+{{/domains}}
+
 
 {{> main/footer }}

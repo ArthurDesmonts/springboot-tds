@@ -10,5 +10,11 @@
 <div id="app" class="ui container">
     <div class="ui inverted menu">
         <a href="/" class="header item">Balance ton pro...</a>
+        {{#isAuthenticated}}
+            <a href="/logout" class="item">Logout</a>
+        {{/isAuthenticated}}
+        {{^isAuthenticated}}
+            <a href="/login" class="item">Logout</a>
+        {{/isAuthenticated}}
         <div class="item right floated">Version : <span class="ui inverted label">2.0.0</span></div>
     </div>

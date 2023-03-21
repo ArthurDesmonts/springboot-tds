@@ -11,7 +11,7 @@ interface DomainRepository:JpaRepository<Domain, Int> {
     @Query(nativeQuery = true,value="SELECT * FROM \"domain\" INNER JOIN \"domain_providers\" ON \"providers_id\"=:providerId ORDER BY rand() LIMIT 1")
     fun getRandomDomainFromProvider(providerId:Int): Domain
 
-    @Query(nativeQuery = true, value = "SELECT * FROM \"domain\" WHERE \"providersName\" =:name")
+    @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"parent_id\" IN (SELECT \"id\" FROM \"domain\" WHERE \"name\"=:name)")
     fun findByParentName(name:String):List<Domain>
     @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"name\"=:name")
     fun findByName(name:String):Domain
