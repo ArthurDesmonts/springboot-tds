@@ -5,18 +5,26 @@
         {{childrenSize}}
     </span>
 </h2>
+<div class="ui link cards">
 {{#domains}}
-    <div class="ui link card">
+    <div class="ui card">
         <div class="content">
             <div class="header">{{name}}</div>
-            <div class="meta">{{providers}}</div>
+            <div class="meta">{{providers.size}} providers</div>
+            <div class="description">
+                {{description}}
+                <br>
+                <i class="bug icon"></i>
+                {{complaints.size}} plaintes
+            </div>
+
         </div>
-        <div class="extra content">
-            <a href="/domain/{{id}}/edit" class="ui button">Modifier</a>
-            <a href="/domain/{{id}}/delete" class="ui button">Supprimer</a>
-        </div>
+            <a href="/domain/{{name}}" class="extra content center aligned">Ouvrir
+                <i class="open door icon"></i>
+            </a>
     </div>
 {{/domains}}
+</div>
 {{^domains}}
     <div class="ui message">
         <div class="header">

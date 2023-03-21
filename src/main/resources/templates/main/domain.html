@@ -1,0 +1,29 @@
+{{> main\header}}
+<h1 class="ui header blue">{{domain.name}}</h1>
+<h2>Domaines
+  <span class="ui label">
+        {{children.size}}
+    </span>
+</h2>
+<div class="ui link cards">
+  {{#children}}
+  <div class="ui card">
+    <div class="content">
+      <div class="header">{{name}}</div>
+      <div class="meta">{{providers.size}} providers</div>
+    </div>
+    <a href="/domain/{{name}}" class="extra content center aligned">Ouvrir
+      <i class="open door icon"></i>
+    </a>
+  </div>
+  {{/children}}
+</div>
+{{^children}}
+<div class="ui message">
+  <div class="header">
+    Aucun domaine
+  </div>
+  <p>Il n'y a aucun domaine pour le moment.</p>
+</div>
+{{/children}}
+{{> main\footer}}

@@ -119,13 +119,7 @@ class InitController {
         }
     }
 
-    @RequestMapping(path=["","/","/index"])
-    fun indexAction(model:ModelMap): String{
-        model["root"] = "Root"
-        model["domains"] = domainRepository.findByParentName("Root")
-        model["childrenSize"] = domainRepository.findByParentName("Root").size
-        return "index"
-    }
+
 
     @RequestMapping("/all/{count}")
     fun initFakeAll(@PathVariable count: Int): String{
