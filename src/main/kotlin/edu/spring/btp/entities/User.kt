@@ -31,4 +31,8 @@ open class User() {
     @ManyToMany(mappedBy = "claimants", cascade = [CascadeType.REMOVE])
     open var claims= mutableListOf<Complaint>()
 
+    @PreRemove
+    fun preRemove(){
+        claims.forEach { it.claimants.remove(this) }
+    }
 }
