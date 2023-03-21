@@ -31,9 +31,9 @@ class MainController {
     }
     @GetMapping("/domain/{name}")
     fun domainAction(@PathVariable name:String, model: ModelMap): String{
-        model["domain"] = domainRepository.findByName(name)
-        model["children"] = domainRepository.getDomainByParentId(domainRepository.findByName(name).id)
+        model["root"] = name
+        model["domains"] = domainRepository.findByParentName(name)
         model["childrenSize"] = domainRepository.findByParentName(name).size
-        return "domain"
+        return "index"
     }
 }

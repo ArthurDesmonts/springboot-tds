@@ -13,11 +13,12 @@ interface DomainRepository:JpaRepository<Domain, Int> {
 
     @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"parent_id\" IN (SELECT \"id\" FROM \"domain\" WHERE \"name\"=:name)")
     fun findByParentName(name:String):List<Domain>
-    @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"name\"=:name")
+    //find by name the domain and return it
+
     fun findByName(name:String):Domain
     @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"parent_id\" IS NULL")
     fun getAllNoParentsDomains():List<Domain>
-    @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"parent_id\"=:id")
+
     fun getDomainByParentId(id:Int):List<Domain>
 
     @Query(nativeQuery = true,value="SELECT * FROM \"domain\" WHERE \"parent_id\"=:id ORDER BY rand() LIMIT 1")
