@@ -8,6 +8,6 @@ interface UserRepository: JpaRepository<User, Int> {
     @Query(nativeQuery = true,value="SELECT * FROM \"user\" ORDER BY rand() LIMIT 1")
     fun getRandomUser(): User
 
-    @Query(nativeQuery = true,value="SELECT * FROM \"user\" WHERE username=?1 OR email=?2")
-    fun findByUsernameOrEmail(username:String, email:String): User
+    @Query(nativeQuery = true,value="SELECT u FROM \"user\" u WHERE u.username=:nameOrMail OR u.email=:nameOrMail")
+    fun findByUsernameOrEmail(nameOrMail : String ): User?
 }

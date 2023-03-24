@@ -36,4 +36,11 @@ class MainController {
         model["childrenSize"] = domainRepository.findByParentName(name).size
         return "index"
     }
+
+    @GetMapping("/complaint/{name}")
+    fun complaintAction(@PathVariable name:String, model: ModelMap): String{
+        model["complaints"] = complaintRepository.findByDomainName(name)
+        model["domainName"] = name
+        return "complaint"
+    }
 }
