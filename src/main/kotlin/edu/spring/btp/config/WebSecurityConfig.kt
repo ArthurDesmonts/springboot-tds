@@ -16,7 +16,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 
 @Configuration
 @EnableWebSecurity
-class WebSecurityConfig {
+class WebSecurityConfig{
     @Bean
     @Throws(Exception::class)
     fun configure(http: HttpSecurity): SecurityFilterChain {
@@ -28,7 +28,7 @@ class WebSecurityConfig {
 
         }
         http
-            .formLogin().loginPage("/login").successForwardUrl("/").and()
+            .formLogin().loginPage("/login").defaultSuccessUrl("/").and()
             .headers().frameOptions().sameOrigin()
             .and()
             .csrf().disable()
