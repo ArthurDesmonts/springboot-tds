@@ -24,8 +24,10 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun configure(http: HttpSecurity): SecurityFilterChain {
         http.authorizeHttpRequests { authorizeHttpRequests ->
-            authorizeHttpRequests.requestMatchers("/complaints/**").hasAuthority("USER")
-            authorizeHttpRequests.anyRequest().permitAll()
+            http.authorizeHttpRequests { authorizeHttpRequests ->
+                authorizeHttpRequests.requestMatchers("/complaints/**").hasRole("USER")
+                authorizeHttpRequests.anyRequest().permitAll()
+            }
         }
 
         http.csrf().disable().formLogin().loginPage("/login").successForwardUrl("/").and().headers().frameOptions()

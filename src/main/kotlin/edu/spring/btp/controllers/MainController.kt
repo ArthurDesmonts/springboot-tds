@@ -7,6 +7,7 @@ import edu.spring.btp.repositories.ProviderRepository
 import edu.spring.btp.repositories.UserRepository
 import edu.spring.btp.service.DbUserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.GetMapping
@@ -34,17 +35,21 @@ class MainController {
     lateinit var dbUserService: DbUserService
 
     @RequestMapping(path=["","/","/index"])
-    fun indexAction(model: ModelMap): String{
+    fun indexAction(model: ModelMap,auth: Authentication?): String{
         model["root"] = "Root"
         model["domains"] = domainRepository.findByParentName("Root")
         model["childrenSize"] = domainRepository.findByParentName("Root").size
+        model["username"] = auth?.name
+        model["back"] = null
         return "index"
     }
     @GetMapping("/domain/{name}")
-    fun domainAction(@PathVariable name:String, model: ModelMap): String{
+    fun domainAction(@PathVariable name:String, model: ModelMap,auth: Authentication?): String{
         model["root"] = name
         model["domains"] = domainRepository.findByParentName(name)
         model["childrenSize"] = domainRepository.findByParentName(name).size
+        model["username"] = auth?.name
+        model["back"] = name
         return "index"
     }
 
