@@ -14,16 +14,16 @@
     <div class="ui card">
         <div class="content">
             <div class="header">{{name}}</div>
-            <div class="meta">{{providers.size}} providers</div>
+            <div class="meta">{{getProvidersCount}} providers</div>
             <div class="description">
                 {{description}}
                 <br>
                 <i class="bug icon blue"></i>
 
-                    {{getComplaintsCount}} plaintes
+                <span class="ui blue text">{{getComplaintsCount}} plaintes</span>
 
                 <a href="/complaint/{{name}}">
-                      <span class="ui left pointing label">
+                      <span class="ui grey left pointing label">
                         {{complaints.size}}
                       </span>
                 </a>

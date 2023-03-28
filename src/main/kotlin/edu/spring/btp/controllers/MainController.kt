@@ -46,7 +46,7 @@ class MainController {
     @GetMapping("/domain/{name}")
     fun domainAction(@PathVariable name:String, model: ModelMap,auth: Authentication?): String{
         model["root"] = name
-        model["domains"] = domainRepository.findByParentName(name)
+        model["domains"] = domainRepository.findByParentName(name ?: "Root")
         model["childrenSize"] = domainRepository.findByParentName(name).size
         model["username"] = auth?.name
         model["back"] = name
@@ -79,4 +79,5 @@ class MainController {
         userRepository.save(user)
         return "redirect:/login"
     }
+
 }

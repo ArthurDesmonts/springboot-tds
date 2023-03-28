@@ -37,15 +37,11 @@ class Domain() {
     }
 
     fun getComplaintsCount():Int{
-        return complaints.size
+        return complaints.size + children.sumOf { it.getComplaintsCount() }
     }
 
-    fun getChildComplaintsCount():Int{
-        var count = 0
-        for(child in children){
-            count += child.getComplaintsCount()
-        }
-        return count
+    fun getProvidersCount():Int{
+        return providers.size
     }
 
 }
