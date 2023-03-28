@@ -70,7 +70,7 @@ class MainController {
             user.password = password
             dbUserService.encodePassword(user)
         }
-        user.role = "USER"
+        user.role = "ROLE_USER"
         userRepository.save(user)
         return "redirect:/login"
     }
