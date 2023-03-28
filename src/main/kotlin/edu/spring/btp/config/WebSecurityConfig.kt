@@ -24,7 +24,8 @@ class WebSecurityConfig{
             authorizeHttpRequests.requestMatchers("/css/**", "/images/**", "/login/**", "/register/**").permitAll() // (1)
             authorizeHttpRequests.requestMatchers(PathRequest.toH2Console()).permitAll()
 
-            authorizeHttpRequests.anyRequest().authenticated() // (4)
+            authorizeHttpRequests.anyRequest().permitAll() // (4)
+
 
         }
         http
@@ -48,7 +49,7 @@ class WebSecurityConfig{
     @Bean
     fun roleHierarchy(): RoleHierarchyImpl? {
         val roleHierarchy = RoleHierarchyImpl()
-        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_STAFF > ROLE_USER > ROLE_GUEST")
+        roleHierarchy.setHierarchy("ADMIN > STAFF > USER > GUEST")
         return roleHierarchy
     }
 

@@ -5,6 +5,7 @@ import edu.spring.btp.repositories.ComplaintRepository
 import edu.spring.btp.repositories.DomainRepository
 import edu.spring.btp.repositories.ProviderRepository
 import edu.spring.btp.repositories.UserRepository
+import edu.spring.btp.service.DbUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -29,6 +30,9 @@ class MainController {
     @Autowired
     lateinit var providerRepository: ProviderRepository
 
+    @Autowired
+    lateinit var dbUserService: DbUserService
+
     @RequestMapping(path=["","/","/index"])
     fun indexAction(model: ModelMap): String{
         model["root"] = "Root"
@@ -51,28 +55,22 @@ class MainController {
         return "complaint"
     }
 
-    @RequestMapping("/login")
-    fun loginAction(): String{
-        return "formLogin"
-    }
-
-    @RequestMapping("/register")
+    @GetMapping("/register")
     fun registerAction(): String{
         return "register"
     }
-
-    @PostMapping("/login")
-    fun loginPostAction(@RequestParam username : String): String{
-        val user = userRepository.findByUsernameOrEmail(username)
-        if(user?.role == "ROLE_ADMIN"){
-            return "redirect:/admin"
+    @PostMapping("/register/newUser")
+    fun registerAction(@RequestParam("username") username:String,
+                       @RequestParam("password") password:String,
+                       @RequestParam("passwordConf") passwordConf:String,
+                       @RequestParam("mail") email:String): String{
+        val user = User(username)
+        user.email = email
+        if(password == passwordConf){
+            user.password = password
+            dbUserService.encodePassword(user)
         }
-        return "redirect:/"
-    }
-
-    @PostMapping("/register")
-    fun registerPostAction(user: User): String{
-        user.role = "ROLE_USER"
+        user.role = "USER"
         userRepository.save(user)
         return "redirect:/login"
     }

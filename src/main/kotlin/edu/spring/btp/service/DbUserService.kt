@@ -20,7 +20,6 @@ class DbUserService:UserDetailsService {
     lateinit var passwordEncoder: PasswordEncoder
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        println("------------------------------------------------------------")
         val user= userRepository.findByUsernameOrEmail(username!!) ?: throw UsernameNotFoundException("User not found")
         return org.springframework.security.core.userdetails.User(user.username,user.password, getGrantedAuthorities(user))
     }
