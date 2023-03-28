@@ -20,7 +20,7 @@
                 <br>
                 <i class="bug icon blue"></i>
 
-                    {{getChildComplaintsCount}} plaintes
+                    {{getComplaintsCount}} plaintes
 
                 <a href="/complaint/{{name}}">
                       <span class="ui left pointing label">
@@ -30,9 +30,11 @@
             </div>
 
         </div>
+        {{#hasChildren}}
             <a href="/domain/{{name}}" class="extra content center aligned">Ouvrir
                 <i class="open door icon"></i>
             </a>
+        {{/hasChildren}}
     </div>
 {{/domains}}
 </div>
