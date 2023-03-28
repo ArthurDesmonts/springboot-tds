@@ -54,9 +54,11 @@ class MainController {
     }
 
     @GetMapping("/complaint/{name}")
-    fun complaintAction(@PathVariable name:String, model: ModelMap): String{
+    fun complaintAction(@PathVariable name:String,auth: Authentication, model: ModelMap): String{
+        model["username"] = auth.name
         model["complaints"] = complaintRepository.findByDomainName(name)
         model["domainName"] = name
+        model["complaintsSize"] = complaintRepository.findByDomainName(name).size
         return "complaint"
     }
 

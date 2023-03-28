@@ -1,11 +1,40 @@
 {{> main/header }}
 <h1 class="ui header blue">{{domainName}}</h1>
-<ul>
-  {{#complaints}}
-    <li>
-      <h3>complaints.title</h3>
-        <p>complaints.description</p>
-    </li>
-  {{/complaints}}
-</ul>
+<h2 class="ui header inverted">Plainte(s)
+  <span class="ui grey label">{{complaintsSize}}</span>
+</h2>
+<div class="ui container grid">
+  <a class="ui button two wide column" href="/">
+    <i class="open door icon"></i>
+    Retour
+  </a>
+  <a class="ui button three wide column" href="">
+    <i class="plus icon"></i>
+    Déposer une plainte
+  </a>
+</div>
+<div class="ui">
+  <div class="ui divider"></div>
+    {{#complaints}}
+    <div class="ui links card">
+      <div class="content">
+        <div class="header">{{title}}</div>
+        <div class="meta">{{user.username}}</div>
+        <div class="description">
+          {{description}}
+        </div>
+        <div class="description">
+          <i class="ui blue user icon"></i>
+          <span class="ui blue text">{{complaints.size}} demandeur</span>
+        </div>
+      </div>
+      {{#hasChildren}}
+      <a class="ui button" href="/domain/{{name}}">
+        <i class="open door icon"></i>
+        Ouvrir
+      </a>
+      {{/hasChildren}}
+    {{/complaints}}
+  </div>
+</div>
 {{> main/footer }}
