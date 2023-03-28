@@ -8,7 +8,7 @@
     <i class="open door icon"></i>
     Retour
   </a>
-  <a class="ui button three wide column" href="">
+  <a class="ui button three wide column" href="/complaints/{{domainName}}/new">
     <i class="plus icon"></i>
     Déposer une plainte
   </a>
@@ -25,7 +25,7 @@
         </div>
         <div class="description">
           <i class="ui blue user icon"></i>
-          <span class="ui blue text">{{complaints.size}} demandeur</span>
+          <span class="ui blue text">{{claimants.size}} demandeur</span>
         </div>
       </div>
       {{#hasChildren}}

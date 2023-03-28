@@ -1,5 +1,6 @@
 package edu.spring.btp.controllers
 
+import edu.spring.btp.entities.Complaint
 import edu.spring.btp.entities.User
 import edu.spring.btp.repositories.ComplaintRepository
 import edu.spring.btp.repositories.DomainRepository
@@ -62,11 +63,38 @@ class MainController {
         return "complaint"
     }
 
-    @GetMapping("/register")
+    @GetMapping("/complaints/{name}/new")
+    fun newComplaintAction(@PathVariable name:String,auth: Authentication, model: ModelMap): String{
+        model["username"] = auth.name
+        model["domainName"] = name
+        return "newComplaint"
+    }
+
+    @PostMapping("/complaints/{name}/new")
+    fun newComplaintAction(@PathVariable name:String,auth: Authentication, model: ModelMap,
+                           @RequestParam("title") title:String,
+                           @RequestParam("description") description:String): String{
+        val user = userRepository.findByUsernameOrEmail(auth.name)
+        val complaint = Complaint()
+        val domain = domainRepository.findByName(name)
+        complaint.title = title
+        complaint.description = description
+        complaint.domain = domain
+        complaint.provider = domain.providers[0]
+        if (user != null) {
+            complaint.user = user
+            complaint.claimants.add(user)
+        }
+        complaintRepository.save(complaint)
+
+        return "redirect:/complaint/$name"
+    }
+
+    @GetMapping("/signup")
     fun registerAction(): String{
         return "register"
     }
-    @PostMapping("/register/newUser")
+    @PostMapping("/signup/newUser")
     fun registerAction(@RequestParam("username") username:String,
                        @RequestParam("password") password:String,
                        @RequestParam("passwordConf") passwordConf:String,
@@ -81,5 +109,7 @@ class MainController {
         userRepository.save(user)
         return "redirect:/login"
     }
+
+
 
 }
